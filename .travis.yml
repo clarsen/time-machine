@@ -1,9 +1,10 @@
-dist: bionic
+# not for now dist: bionic # 18.04
 language: cpp
 compiler: gcc
 addons:
   apt:
     packages:
+      - libpcap-dev
       - cmake-data
       - cmake
-script: ./configure && make
+script: ./configure --disable-perftools && make
