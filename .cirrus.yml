@@ -1,0 +1,5 @@
+# FreeBSD CI builds
+task:
+  freebsd_instance:
+    image_family: freebsd-12-1
+  script: ./configure && make
