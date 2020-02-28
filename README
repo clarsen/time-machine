@@ -1,6 +1,9 @@
 .. image:: https://travis-ci.org/clarsen/time-machine.svg?branch=master
     :target: https://travis-ci.org/clarsen/time-machine
 
+.. image:: https://api.cirrus-ci.com/github/clarsen/time-machine.svg?branch=master
+    :target: https://cirrus-ci.com/github/clarsen/time-machine
+
 =========================================
 Time-Machine Dynamic Bulk Packet Recorder
 =========================================

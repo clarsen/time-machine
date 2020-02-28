@@ -2,4 +2,5 @@
 task:
   freebsd_instance:
     image_family: freebsd-12-1
+  install_script: pkg install -y cmake
   script: ./configure && make
