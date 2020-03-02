@@ -70,6 +70,7 @@
 %token TOK_CLASS TOK_FILTER TOK_MAIN TOK_LOG_INTERVAL TOK_LOG_LEVEL TOK_DEVICE
 %token TOK_CLASSDIR
 %token TOK_LOGFILE TOK_WORKDIR TOK_QUERYFILEDIR TOK_INDEXDIR TOK_PROFILEPATH
+%token TOK_LOGDIR
 %token TOK_READ_TRACEFILE TOK_BRO_CONNECT_STR
 %token TOK_MEM TOK_DISK TOK_K TOK_M TOK_G TOK_CUTOFF TOK_PRECEDENCE
 %token TOK_DYN_TIMEOUT
@@ -80,6 +81,9 @@
 %token TOK_TWEAK_CAPTURE_THREAD TOK_SCOPE TOK_PRIORITY 
 %token TOK_INDEX
 %token TOK_FILENAME_FORMAT TOK_CLASSDIR_FORMAT
+%token TOK_DYNLINK_LINK_1 TOK_DYNLINK_TARGET_1
+%token TOK_DYNLINK_LINK_2 TOK_DYNLINK_TARGET_2
+%token TOK_DYNLINK_LINK_3 TOK_DYNLINK_TARGET_3
 %token TOK_UNLIMITED
 
 %type <s> classname option
@@ -201,7 +205,7 @@ classoption:
 		newclass->setDynTimeout($2);
 		$$=newclass;
 	}
-    | TOK_CLASSDIR TOK_STRING {
+	| TOK_CLASSDIR TOK_STRING {
 		new_class();
         //conf_classdir = ($2);
         newclass->setClassdir($2);
@@ -217,6 +221,37 @@ classoption:
 		newclass->setClassdirFormat($2);
 		$$=newclass;
 	}
+	| TOK_DYNLINK_LINK_1 TOK_STRING {
+		new_class();
+		newclass->setDynlinkLink1($2);
+		$$=newclass;
+	}
+	| TOK_DYNLINK_TARGET_1 TOK_STRING {
+		new_class();
+		newclass->setDynlinkTarget1($2);
+		$$=newclass;
+	}
+	| TOK_DYNLINK_LINK_2 TOK_STRING {
+		new_class();
+		newclass->setDynlinkLink2($2);
+		$$=newclass;
+	}
+	| TOK_DYNLINK_TARGET_2 TOK_STRING {
+		new_class();
+		newclass->setDynlinkTarget2($2);
+		$$=newclass;
+	}
+	| TOK_DYNLINK_LINK_3 TOK_STRING {
+		new_class();
+		newclass->setDynlinkLink3($2);
+		$$=newclass;
+	}
+	| TOK_DYNLINK_TARGET_3 TOK_STRING {
+		new_class();
+		newclass->setDynlinkTarget3($2);
+		$$=newclass;
+	}
+
 	;
 size:
 	TOK_INTEGER { $$=$1; }
@@ -249,6 +284,9 @@ main_option:
 	TOK_LOGFILE TOK_STRING {
 	  conf_main_logfile_name=$2;
 	}
+	| TOK_LOGDIR TOK_STRING {
+	  conf_main_logdir=$2;
+	}
 	| TOK_CONN_TIMEOUT TOK_DOUBLE {
 	  conf_parser_storageConf->conn_timeout=$2;
 	}
@@ -271,6 +309,30 @@ main_option:
 	}
 	| TOK_CLASSDIR_FORMAT TOK_STRING {
 		conf_main_classdir_format=strdup($2);
+		free($2);
+	}
+	| TOK_DYNLINK_TARGET_1 TOK_STRING {
+		conf_main_dynlink_target_1 = strdup($2);
+		free($2);
+	}
+	| TOK_DYNLINK_LINK_1 TOK_STRING {
+		conf_main_dynlink_link_1 = strdup($2);
+		free($2);
+	}
+	| TOK_DYNLINK_TARGET_2 TOK_STRING {
+		conf_main_dynlink_target_2 = strdup($2);
+		free($2);
+	}
+	| TOK_DYNLINK_LINK_2 TOK_STRING {
+		conf_main_dynlink_link_2 = strdup($2);
+		free($2);
+	}
+	| TOK_DYNLINK_TARGET_3 TOK_STRING {
+		conf_main_dynlink_target_3 = strdup($2);
+		free($2);
+	}
+	| TOK_DYNLINK_LINK_3 TOK_STRING {
+		conf_main_dynlink_link_3 = strdup($2);
 		free($2);
 	}
 	| TOK_FILENAME_FORMAT TOK_STRING {

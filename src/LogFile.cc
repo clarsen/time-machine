@@ -10,9 +10,20 @@
 
 #define MAX_MSG_LEN 1024
 
-LogFile::LogFile(const std::string& filename):
-filename(filename) {
-	fs=new std::ofstream(filename.c_str(), std::ios::app);
+LogFile::LogFile(const char *logdir_default, const char *logdir_s, const std::string filename_arg):
+filename(filename_arg) {
+	if (logdir_s) {
+		logdir.assign(logdir_s);
+	} else {
+		logdir.assign(logdir_default);
+	}
+
+	path = logdir;
+	if (logdir[logdir.length()-1] != '/') {
+		path += "/";
+	}
+	path += filename;
+	fs=new std::ofstream(path.c_str(), std::ios::app);
 	fs->setf(std::ios::fixed);
 	//log("logfile", "logfile opened");
 }
@@ -66,7 +77,7 @@ void LogFile::log(const char* ident, const char* fmt, ...) {
         */
 
 	if (fs->fail()) {
-		fprintf(stderr, "failure writing to log file %s\n", filename.c_str());
+		fprintf(stderr, "failure writing to log file %s\n", path.c_str());
 	}
 	va_end(ap);
 }
@@ -74,14 +85,14 @@ void LogFile::log(const char* ident, const char* fmt, ...) {
 void LogFile::logPlain(const std::string& msg) {
 	*fs << msg << std::endl;
 	if (fs->fail()) {
-		fprintf(stderr, "failure writing to log file %s\n", filename.c_str());
+		fprintf(stderr, "failure writing to log file %s\n", path.c_str());
 	}
 }
 
 void LogFile::logPlain(const char *msg) {
 	*fs << msg << std::endl;
 	if (fs->fail()) {
-		fprintf(stderr, "failure writing to log file %s\n", filename.c_str());
+		fprintf(stderr, "failure writing to log file %s\n", path.c_str());
 	}
 }
 

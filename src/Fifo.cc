@@ -46,9 +46,15 @@ Fifo::Fifo(const std::string& classname, uint64_t fifo_mem_sz, uint64_t fifo_dis
 void Fifo::init() {
 	classname="default";
 	classnameId = classname;
-        classdir=conf_main_workdir;
+	classdir=conf_main_workdir;
 	classdir_format = conf_main_classdir_format;
 	filename_format = conf_main_filename_format;
+	dynlink_target_1 = conf_main_dynlink_target_1;
+	dynlink_link_1 = conf_main_dynlink_link_1;
+	dynlink_target_2 = conf_main_dynlink_target_2;
+	dynlink_link_2 = conf_main_dynlink_link_2;
+	dynlink_target_3 = conf_main_dynlink_target_3;
+	dynlink_link_3 = conf_main_dynlink_link_3;
 	filter="";
 	fifo_mem_sz=5000000;
 	fifo_disk_sz=50000000;
@@ -82,7 +88,10 @@ void Fifo::start() {
     // ph is the handler
 	fd=new FifoDisk(classname, fifo_disk_sz, fifo_disk_filesz, ph, classdir, 
 		filename_format, classdir_format, classnameId,
-		fifo_disk_unlimited);
+		fifo_disk_unlimited, 
+		dynlink_target_1, dynlink_link_1,
+		dynlink_target_2, dynlink_link_2,
+		dynlink_target_3, dynlink_link_3);
     
     // setting eviction handler for FifoMem object
 	fm->setEvictionHandler(this);

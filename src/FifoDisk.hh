@@ -23,7 +23,10 @@ public:
 			 uint64_t file_size, pcap_t*, const char* classdir,
 			 const char* filename_format, const char* classdir_format,
 			 const std::string &classnameId,
-			 bool size_unlimited
+			 bool size_unlimited,
+			 const char *dynlink_target_1, const char *dynlink_link_1,
+			 const char *dynlink_target_2, const char *dynlink_link_2,
+			 const char *dynlink_target_3, const char *dynlink_link_3
 			 );
 	~FifoDisk();
 	//  void addPkt(const struct pcap_pkthdr *header, const unsigned char *packet);
@@ -70,13 +73,21 @@ public:
 	void incQueryInProgress() { };
 	void decQueryInProgress() { };
 #endif
+	void update_dynlink(const char *target, const char *link, time_t newestTimestamp, const std::string &newCapDir, const std::string &newCapFname);
 
 protected:
 	std::string classname;
 	std::string classnameId;
-        const char* classdir;
+  const char* classdir;
 	const char* filename_format;
 	const char* classdir_format;
+	const char *dynlink_target_1;
+	const char *dynlink_link_1;
+	const char *dynlink_target_2;
+	const char *dynlink_link_2;
+	const char *dynlink_target_3;
+	const char *dynlink_link_3;
+
 	std::list <FifoDiskFile*> files;
 	uint64_t size;
 	bool size_unlimited;

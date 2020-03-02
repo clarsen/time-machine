@@ -1,3 +1,10 @@
+0.1-7 |
+    * Fix: logging error/filename member contained reference to stack variable
+    * feature: logdir directive to place logfiles in different directory than workdir
+    * feature: dynlink_target_N and dynlink_link_N maintain symlinks based on current time (now_timestamp),
+      current time - 24 hours (yesterday_timestamp), or newest timestamp of class's capture file (newest_timestamp).
+    * minor change: if configure --enable-debug, then don't build with '-O'
+
 0.1-6 | 2020-02-10 10:40:00 -0800
     * Update CMakeFiles.txt to work on FreeBSD12
     * Allow for "disk unlimited" to not remove captures at all, along with disabling in-memory indexing for that use.

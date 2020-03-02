@@ -61,6 +61,7 @@ NEWLINE \n
 "indexdir"	 return TOK_INDEXDIR;
 "profilepath"    return TOK_PROFILEPATH;
 "index"      return TOK_INDEX;
+"logdir"   return TOK_LOGDIR;
 "logfile"	 return TOK_LOGFILE;
 "bro_connect_str" return TOK_BRO_CONNECT_STR;
 "pkts_to_disk"	 return TOK_PKTS_TO_DISK;
@@ -73,6 +74,12 @@ NEWLINE \n
 "priority"		return TOK_PRIORITY;
 "filename_format" return TOK_FILENAME_FORMAT;
 "classdir_format" return TOK_CLASSDIR_FORMAT;
+"dynlink_target_1" return TOK_DYNLINK_TARGET_1;
+"dynlink_link_1" return TOK_DYNLINK_LINK_1;
+"dynlink_target_2" return TOK_DYNLINK_TARGET_2;
+"dynlink_link_2" return TOK_DYNLINK_LINK_2;
+"dynlink_target_3" return TOK_DYNLINK_TARGET_3;
+"dynlink_link_3" return TOK_DYNLINK_LINK_3;
 
 "rmtconsole_listen_addr"	return TOK_RMTCONSOLE_LISTEN_ADDR;
 "rmtconsole_port"	return TOK_RMTCONSOLE_PORT;

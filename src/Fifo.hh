@@ -87,6 +87,24 @@ public:
 	const char* getClassdirFormat() {
 		return classdir_format;
 	}
+	void setDynlinkTarget1(const char *target) {
+		dynlink_target_1 = target;
+	}
+	void setDynlinkLink1(const char *link) {
+		dynlink_link_1 = link;
+	}
+	void setDynlinkTarget2(const char *target) {
+		dynlink_target_2 = target;
+	}
+	void setDynlinkLink2(const char *link) {
+		dynlink_link_2 = link;
+	}
+	void setDynlinkTarget3(const char *target) {
+		dynlink_target_3 = target;
+	}
+	void setDynlinkLink3(const char *link) {
+		dynlink_link_3 = link;
+	}
 	void setFifoMemSz(uint64_t s) {
 		fifo_mem_sz=s;
 	}
@@ -142,9 +160,15 @@ protected:
 	std::string classname;
 	std::string classnameId;
 	std::string filter;
-    const char* classdir; 
-        const char* filename_format;
+  const char* classdir; 
+  const char* filename_format;
 	const char* classdir_format;
+	const char *dynlink_target_1;
+	const char *dynlink_link_1;
+	const char *dynlink_target_2;
+	const char *dynlink_link_2;
+	const char *dynlink_target_3;
+	const char *dynlink_link_3;
 	uint64_t fifo_mem_sz;
 	uint64_t fifo_disk_sz;
 	bool fifo_disk_unlimited;

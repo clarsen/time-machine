@@ -121,6 +121,7 @@ const char* conf_main_indexdir="./";
 const char* conf_main_profilepath="./";
 //const char* conf_classdir = "./";
 const char* conf_main_queryfiledir="./";
+const char* conf_main_logdir=NULL;
 const char* conf_main_logfile_name="timemachine.log";
 const char* conf_main_bro_connect_str=NULL;
 int conf_main_console=0;
@@ -136,6 +137,12 @@ struct in_addr conf_main_bro_listen_addr; // defualt value is set in main!
 
 const char *conf_main_classdir_format = NULL; // default is no special directory naming
 const char *conf_main_filename_format = NULL; // default is no special fifo file naming
+const char *conf_main_dynlink_target_1 = NULL; // default is no dynamic soft link creation
+const char *conf_main_dynlink_link_1 = NULL; // default is no dynamic soft link creation
+const char *conf_main_dynlink_target_2 = NULL; // default is no dynamic soft link creation
+const char *conf_main_dynlink_link_2 = NULL; // default is no dynamic soft link creation
+const char *conf_main_dynlink_target_3 = NULL; // default is no dynamic soft link creation
+const char *conf_main_dynlink_link_3 = NULL; // default is no dynamic soft link creation
 
 /***************************************************************************
  * logging functions
@@ -428,11 +435,11 @@ void *statisticslog_thread(void* arg)
 	std::list<Fifo*> fifos;
 	Indexes *indexes;
 
-	stats_log_file = new LogFile(std::string("stats.") + conf_main_logfile_name);
-	classes_log_file = new LogFile(std::string("classes.") + conf_main_logfile_name);
+	stats_log_file = new LogFile(conf_main_workdir, conf_main_logdir, std::string("stats.") + conf_main_logfile_name);
+	classes_log_file = new LogFile(conf_main_workdir, conf_main_logdir, std::string("classes.") + conf_main_logfile_name);
     // some simple initial play with the code
-	//classes_log_file = new LogFile(std::string("classes_test.") + conf_main_logfile_name);
-	index_log_file = new LogFile(std::string("indexes.") + conf_main_logfile_name);
+	//classes_log_file = new LogFile(conf_main_workdir, conf_main_logdir, std::string("classes_test.") + conf_main_logfile_name);
+	index_log_file = new LogFile(conf_main_workdir, conf_main_logdir, std::string("indexes.") + conf_main_logfile_name);
 
 	stats_log_file->logPlain(
 			"timestamp "
@@ -920,7 +927,7 @@ main(int argc, char** argv) {
 		return(1);
 	}
 
-	log_file=new LogFile(conf_main_logfile_name);
+	log_file=new LogFile(conf_main_workdir, conf_main_logdir, conf_main_logfile_name);
 	tmlog("main: main.cc.in, ~line 655", "TimeMachine version %s", VERSION);
 
 	if (!conf_main_daemon)
